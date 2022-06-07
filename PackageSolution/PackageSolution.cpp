@@ -21,21 +21,16 @@ int main(){
 		if (splitPos == line.npos) {
 			break;
 		}
+        Rectangle rectangle(std::stoi(line.substr(0, splitPos)),
+                       std::stoi(line.substr(splitPos + 1)));
+        if (!rectangle.height() || !rectangle.width()) {
+            break;
+        }
 		if (firstLine) {
-            Rectangle box(std::stoi(line.substr(0, splitPos)),
-				std::stoi(line.substr(splitPos + 1)));
-			if (!box.height() || !box.width()) {
-				break;
-			}
-			source.first = std::move(box);
+			source.first = std::move(rectangle);
 			firstLine = false;
 		}
 		else {
-			Rectangle rectangle(std::stoi(line.substr(0, splitPos)),
-				std::stoi(line.substr(splitPos + 1)));
-			if (!rectangle.height() || !rectangle.width()) {
-				break;
-			}
 			source.second.emplace_back(std::move(rectangle));
 		}
 	}
