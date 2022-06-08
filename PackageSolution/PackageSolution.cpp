@@ -37,7 +37,10 @@ int main(){
 	if (source.second.empty() || !source.first.height() || !source.first.width()) {
 		return -1;
 	}
-	auto res = Packanger().getBetterResult(std::move(PackageWays::FCNR(std::move(source))));
+
+    Packanger::source_type rotatedSource{source.first.rotate(), source.second};
+	auto res = Packanger().getBetterResult(std::move(PackageWays::FCNR(std::move(source))),
+                                           std::move(PackageWays::FCNR(std::move(rotatedSource))));
 	std::cout << std::get<0>(res) << "," << std::get<1>(res).to_string() << "\n";
 	for (auto const& it : std::get<2>(res)) {
 		std::cout << it.to_string() << std::endl;

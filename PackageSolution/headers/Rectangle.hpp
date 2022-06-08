@@ -30,14 +30,17 @@ private:
 	size_t m_height;
 	size_t m_width;
 };
-
+/**
+ * kind of storage rectangle
+ * storage only left bottom, right upper point and container number
+ */
 class RectangleStoraged {
 public:
 	RectangleStoraged(std::pair<size_t, size_t> left_bottom,
 		std::pair<size_t, size_t>  right_upper,
 		size_t container)
-		: m_left_bottom(left_bottom)
-		, m_right_upper(right_upper)
+		: m_left_bottom(std::move(left_bottom))
+		, m_right_upper(std::move(right_upper))
 		, m_container(container) {}
 
 	std::pair<size_t, size_t> const& getLeftBottom() const {
@@ -48,13 +51,6 @@ public:
 		return m_right_upper;
 	}
 
-    inline constexpr size_t height() const {
-        return m_right_upper.second - m_left_bottom.second;
-    }
-
-    inline constexpr size_t width() const {
-        return m_right_upper.first - m_left_bottom.first;
-    }
 	std::string to_string() const {
 		return std::string(std::to_string(m_container))
 			.append(",")

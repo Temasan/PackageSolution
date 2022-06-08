@@ -5,7 +5,10 @@
 #include <list>
 #include "Rectangle.hpp"
 
-
+/**
+ * Instrument to start multiple execution() objects to get better variant of solution
+ * Better variant mean the less boxes for the same rectangle counts
+ */
 class Packanger {
 public:
 	using result_type = std::tuple<std::size_t, Rectangle, std::vector<RectangleStoraged>>;
